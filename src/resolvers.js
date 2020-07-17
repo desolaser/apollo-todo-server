@@ -1,9 +1,5 @@
-import Todo from './todo/todo.model'
+import { todoResolver } from "./todo";
 
-const resolvers = {
-    Query: {
-        todos: () => Todo.find({})
-    }
-}
+const resolvers = todoResolver;
 
-export default resolvers
+export default resolvers;

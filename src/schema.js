@@ -1,14 +1,5 @@
-import { gql } from 'apollo-server'
+import { todoSchema } from "./todo";
 
-const typeDefs = gql`
-    type Todo {
-        task: String
-        description: String
-    }
+const schemas = todoSchema;
 
-    type Query {
-        todos: [Todo]
-    }
-`
-
-export default typeDefs
+export default schemas;

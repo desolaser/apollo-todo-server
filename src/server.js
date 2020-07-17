@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
 import resolvers from './resolvers'
-import typeDefs from './schema'
+import schemas from './schema'
 
 // Load environment variables
 dotenv.config({ path: ".env" });
@@ -13,9 +13,9 @@ mongoose.set("debug", true);
 mongoose.connect(process.env.MONGO_DB_URI)
 mongoose.connection.once('open', () => console.log('Connected to database'))
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers
+const server = new ApolloServer({    
+	typeDefs: schemas,
+	resolvers
 })
 
 server.listen().then(({url}) => {
