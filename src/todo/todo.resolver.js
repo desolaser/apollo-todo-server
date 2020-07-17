@@ -7,7 +7,10 @@ const todoResolver = {
     Mutation: {
         addTodo: (parent, args) => {
             return todoController.addUser(args)
-        }
+        },
+        updateTodo: (parent, args) => {
+            return todoController.updateUser(args)
+        },
     }
 }
 
