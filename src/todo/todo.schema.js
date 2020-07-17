@@ -7,8 +7,12 @@ const todoSchema = gql`
 	}
 
     type Query {
-        todos: [Todo]
-    }
+		todos: [Todo]
+	}
+
+	type Mutation {
+		addTodo(task: String!, description: String!): Todo
+	}
 `
 
 export { todoSchema }

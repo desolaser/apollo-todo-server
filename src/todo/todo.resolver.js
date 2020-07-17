@@ -1,8 +1,13 @@
-import Todo from './todo.model'
+import todoController from './todo.controller'
 
 const todoResolver = {
     Query: {
-        todos: () => Todo.find({})
+        todos: () => todoController.getUsers()
+    },
+    Mutation: {
+        addTodo: (parent, args) => {
+            return todoController.addUser(args)
+        }
     }
 }
 
