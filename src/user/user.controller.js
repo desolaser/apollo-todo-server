@@ -13,10 +13,11 @@ const userController = {
     },
     updateUser: async ({ id, email, password }) => {
         const user = await User.findById(id)
+        const hashedPassword = ""
         if(email) 
             user.email = email
         if(password) 
-            const hashedPassword = await bcrypt.hash(password, 10)
+            hashedPassword = await bcrypt.hash(password, 10)
             user.password = hashedPassword
         user.save()
         return user
