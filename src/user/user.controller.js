@@ -16,7 +16,8 @@ const userController = {
         if(email) 
             user.email = email
         if(password) 
-            user.password = password
+            const hashedPassword = await bcrypt.hash(password, 10)
+            user.password = hashedPassword
         user.save()
         return user
     },
@@ -24,7 +25,7 @@ const userController = {
         const user = await User.findByIdAndRemove(id)
         return user
     },
-    register: async ({ email, password }) => {        
+    register: async ({ email, password }) => {
         const hashedPassword = await bcrypt.hash(password, 10)
         const user = new User({ email, password: hashedPassword })
         user.save()
