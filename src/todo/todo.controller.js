@@ -12,9 +12,11 @@ const todoController = {
         return todo
     },
     updateUser: async ({ id, task, description }) => {
-        const todo = await Todo.findById(id)
-        todo.task = task
-        todo.description = description
+        const todo = await Todo.findById(id)        
+        if(task) 
+            todo.task = task
+        if(description) 
+            todo.description = description
         todo.save();
         return todo
     },

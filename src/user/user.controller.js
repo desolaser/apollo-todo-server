@@ -13,8 +13,10 @@ const userController = {
     },
     updateUser: async ({ id, email, password }) => {
         const user = await User.findById(id)
-        user.email = email
-        user.password = password
+        if(email) 
+            user.email = email
+        if(password) 
+            user.password = password
         user.save()
         return user
     },
