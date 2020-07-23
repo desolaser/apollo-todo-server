@@ -2,7 +2,8 @@ import mongoose from "mongoose"
 
 const todoSchema = new mongoose.Schema({
     task: String,
-    description: String
+    description: String,
+    userId: String
 })
 
 const Todo = mongoose.model("todos", todoSchema)

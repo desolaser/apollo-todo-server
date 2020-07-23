@@ -15,17 +15,26 @@ const todoController = {
         const todo = await Todo.findById(id);
         return todo
     },
-    addTodo: ({ task, description }, { user }) => {
+    getUserTodos: ({ userId }, { user }) => {
+        if(!user)
+            throw new AuthenticationError('You must log in')
+
+        return Todo.find({ userId: userId })
+    },
+    addTodo: ({ task, description, userId }, { user }) => {
         if(!user)
             throw new AuthenticationError('You must log in') 
 
-        const todo = new Todo({ task, description })
+        const todo = new Todo({ task, description, userId })
         todo.save()
         return todo
     },
-    updateTodo: async ({ id, task, description }, { user }) => {
+    updateTodo: async ({ id, task, description, userId }, { user }) => {
         if(!user)
             throw new AuthenticationError('You must log in')
+
+        if(userId !== user.id)
+            throw new AuthenticationError('You can not update this task if you are not the owner')
 
         const todo = await Todo.findById(id)
 
@@ -37,9 +46,12 @@ const todoController = {
         todo.save();
         return todo
     },
-    deleteTodo: async ({ id }, { user }) => {
+    deleteTodo: async ({ id, userId }, { user }) => {
         if(!user)
             throw new AuthenticationError('You must log in')
+
+        if(userId !== user.id)
+            throw new AuthenticationError('You can not delete this task if you are not the owner')
 
         const todo = await Todo.findByIdAndRemove(id)
         return todo

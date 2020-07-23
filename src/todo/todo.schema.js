@@ -5,17 +5,19 @@ const todoSchema = gql`
 		id: ID
 		task: String
 		description: String
+		user: User
 	}
 
     extend type Query {
 		todo(id: ID!): Todo
 		todos: [Todo]
+		userTodos(userId: ID!): [Todo]
 	}
 
 	extend type Mutation {
-		addTodo(task: String!, description: String!): Todo
-		updateTodo(id: ID!, task: String, description: String): Todo
-		deleteTodo(id: ID!): Todo
+		addTodo(task: String!, description: String!, userId: ID!): Todo
+		updateTodo(id: ID!, task: String, description: String, userId: ID!): Todo
+		deleteTodo(id: ID!, userId: ID!): Todo
 	}
 `
 
