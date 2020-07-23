@@ -12,7 +12,7 @@ dotenv.config({ path: ".env" })
 const getUser = token => {
 	try {
 		if (token) {
-			return jwt.verify(token, process.env.SECRET_ENV)
+			return jwt.verify(JSON.parse(token), process.env.SECRET_ENV)
 		}
 		return null
 	} catch (err) {
@@ -29,11 +29,10 @@ mongoose.connection.once('open', () => console.log('Connected to database'))
 const server = new ApolloServer({    
 	typeDefs: schemas,
 	resolvers,
-	context: ({ req }) => {
+	context: ({ req }) => {  
 		const tokenWithBearer = req.headers.authorization || ''
 		const token = tokenWithBearer.split(' ')[1]
-		const user = getUser(token)
-
+		const user = getUser(token) || ''
 		return {
 			user
 		}

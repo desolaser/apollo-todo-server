@@ -2,13 +2,13 @@ import todoController from './todo.controller'
 
 const todoResolver = {
     Query: {
-        todos: () => todoController.getUsers(),
-        todo: (parent, args) => todoController.getUser(args),
+        todos: (parent, args, context) => todoController.getTodos(context),
+        todo: (parent, args, context) => todoController.getTodo(args, context),
     },
     Mutation: {
-        addTodo: (parent, args) => todoController.addUser(args),
-        updateTodo: (parent, args) => todoController.updateUser(args),
-        deleteTodo: (parent, args) => todoController.deleteUser(args)
+        addTodo: (parent, args, context) => todoController.addTodo(args, context),
+        updateTodo: (parent, args, context) => todoController.updateTodo(args, context),
+        deleteTodo: (parent, args, context) => todoController.deleteTodo(args, context)
     }
 }
 
